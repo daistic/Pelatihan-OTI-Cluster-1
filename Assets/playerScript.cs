@@ -9,6 +9,8 @@ public class playerScript : MonoBehaviour
     [SerializeField] private LayerMask platformLayer;
     [SerializeField] private float coyoteTime = 0.2f;
     [SerializeField] private float coyoteCounter = 0;
+    [SerializeField] Animator animator;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _collider;
@@ -22,7 +24,7 @@ public class playerScript : MonoBehaviour
         _collider = GetComponent<BoxCollider2D>();
     }
 
-    
+
     void Update()
     {
         collectInputs();
@@ -30,13 +32,23 @@ public class playerScript : MonoBehaviour
         if (isGrounded)
         {
             coyoteCounter = 0;
-        } 
+        }
         else
         {
             coyoteCounter += Time.deltaTime;
         }
 
         _rigidbody.AddForceX(moveSpeed * Input.GetAxisRaw("Horizontal"));
+
+        if (Input.GetAxisRaw("Horizontal") != 0) {
+
+            animator.SetFloat("speed", Math.Abs(Input.GetAxisRaw("Horizontal")));
+            if (Input.GetAxisRaw("Horizontal") < 0) spriteRenderer.flipX = true;
+            else spriteRenderer.flipX = false;
+
+        }
+
+        else animator.SetFloat("speed", Math.Abs(Input.GetAxisRaw("Horizontal")));
 
         if (Input.GetAxisRaw("Vertical") > 0)
         {
