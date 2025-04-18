@@ -16,21 +16,22 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] public GameObject player;
     [SerializeField] private TextMeshProUGUI scoreText;
     public int score;
 
     private void Update()
     {
-        if (player.transform.position.y  > score)
-        {
-            addScore(1);
-        }
+        
     }
 
     public void addScore(int increment)
     {
         score += increment;
         scoreText.text = score.ToString();
+    }
+
+    public void PlusOne()
+    {
+        addScore(1);
     }
 }

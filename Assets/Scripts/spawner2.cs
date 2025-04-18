@@ -14,10 +14,6 @@ public class spawner2 : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.score-lastScore > spawnDistance)
-        {
-            lastScore = GameManager.Instance.score;
-            Instantiate(platform, new Vector3(Random.Range(-offset.x, offset.x), GameManager.Instance.player.transform.position.y + offset.y, 0), Quaternion.identity);
-        }
+       
     }
 }
